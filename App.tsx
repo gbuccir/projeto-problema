@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Router from './src/components/route'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>ULA TUTUUUUUUUU</Text>
-      <Text>Vamos ver se funciona mesmo</Text>
-    </View>
+    // <View style={styles.container}>
+    //   <Text>ULA TUTUUUUUUUU</Text>
+    //   <Text>Vamos ver se funciona mesmo</Text>
+    // </View>
+    <Router />
   );
 }
 
