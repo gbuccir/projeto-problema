@@ -5,13 +5,17 @@ import { render } from 'react-dom';
 
 export default class Home extends Component {
 
-  // irParaHistorico = (user) => {
-  //   this.props.navigation.navigate('Historico' , {login: user});
-  // }
+  irParaHistorico = (user) => {
+    this.props.navigation.navigate('Historico' , {login: user});
+  }
+
+  state = {
+  }
 
   irParaNovo = (user) => {
-    Alert.alert(user);
-    this.props.navigation.navigate('NovoProblema' , {login: user});
+    // Alert.alert(user);
+    // this.props.navigation.setParams({login:user});
+    this.props.navigation.navigate('NovoProblema', {login:user});
   }
 
   render() {
@@ -24,12 +28,12 @@ export default class Home extends Component {
         <Button
           title="Criar novo problema"
           color="#f194ff"
-          onPress={(usuario) => this.irParaNovo(usuario)} />
+          onPress={() => this.irParaNovo(usuario)} />
 
-        {/* <Button
+        <Button
           title="Histórico"
           color="#f194ff"
-          onPress={() => this.irParaHistorico(usuario)} /> */}
+          onPress={() => this.irParaHistorico(usuario)} />
       </View>
     );
   };
