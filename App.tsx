@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Router from './src/components/route'
+import Router from './src/utils/route'
 
 export default function App() {
   return (

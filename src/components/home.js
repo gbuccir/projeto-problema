@@ -13,8 +13,6 @@ export default class Home extends Component {
   }
 
   irParaNovo = (user) => {
-    // Alert.alert(user);
-    // this.props.navigation.setParams({login:user});
     this.props.navigation.navigate('NovoProblema', {login:user});
   }
 

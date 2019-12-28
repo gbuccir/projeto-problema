@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
- import Login from './login'
- import Home from './home'
- import NovoProblema from './novoProblema'
- import Historico from './historico'
+ import Login from '../components/login'
+ import Home from '../components/home'
+ import NovoProblema from '../components/novoProblema'
+ import Historico from '../components/historico'
 
 const MainNav = createStackNavigator(
     {
