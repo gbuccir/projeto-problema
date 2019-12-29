@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Picker, Alert, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ManutencaoEnum from '../utils/enums'
-// import ImagePicker from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
-
-// const ImagePicker = require('react-native-image-picker');
-// import { RNCamera } from 'react-native-camera';
-
-// import * as Permissions from 'expo-permissions';
-// import {PermissionsAndroid} from 'react-native';
 
 
 export default class NovoProblema extends Component {
@@ -36,39 +29,29 @@ export default class NovoProblema extends Component {
   tiraFoto = async () => {
 
     const options = {
-      base64:true
+      base64: true
     };
 
 
-    // ImagePicker.launchImageLibraryAsync(
-      let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: false,
-        aspect: [4, 3],
-        quality: 1,
-        base64:true,
-      });
-  
-      console.log(result);
-  
-      if (!result.cancelled) {
-        this.setState({ image: result.uri });
-      }
-    
-    // );
-    // RNCamera.Constants.CameraStatus = 'READY';
-    // RNCamera.Constants.RecordAudioPermissionStatus = 'AUTHORIZED';
-    // const granted = Permissions.askAsync(Permissions.WRITE_EXTERNAL_STORAGE);
-    // this.render();
+
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: false,
+      aspect: [4, 3],
+      quality: 1,
+      base64: true,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+
   }
 
   takePicture = async () => {
 
-    // if (this.camera) {
-    //   const options = { quality: 0.5, base64: true };
-    //   const data = await this.camera.takePictureAsync(options)
-    //   alert(data.uri);
-    // }
   }
 
 
@@ -80,10 +63,10 @@ export default class NovoProblema extends Component {
     return (
       <View style={styles.container}>
         <Text>Escolha o CDA</Text>
-        <Picker placeholder="CDA selecionado" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker>
+          <Picker placeholder="CDA selecionado" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
 
         <Text>Qual problema ? </Text>
         <TextInput value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
@@ -92,23 +75,10 @@ export default class NovoProblema extends Component {
         <Button title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
         <Button title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} />
 
-        <Text>Se quiser escolhacl uma foto </Text>
-        {/* <RNCamera
-          // ref={camera => { this.xamera = camera }}
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          autoFocus={RNCamera.Constants.AutoFocus.on}
-          flashMode={RNCamera.Constants.FlashMode.off}
+        <Text>Se quiser escolha uma foto </Text>
 
-        /> */}
 
-        {/* 
-androidCameraPermissionOptions={ title= "Permitir camera",
-            message= "deve permitir uso para foto",
-            buttonPositive= "ok",
-            buttonNegative= "cancelar"} */}
-
-{image &&
+        {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         <View >
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
