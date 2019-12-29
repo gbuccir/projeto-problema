@@ -9,6 +9,12 @@ buildscript {
         supportLibVersion = "28.0.0"
     }
     repositories {
+         maven { url "https://jitpack.io" } // Linha adicionada
+    maven { url "https://maven.google.com" } // Linha adicionada
+    maven {
+            // expo-camera bundles a custom com.google.android:cameraview
+            url "$rootDir/../node_modules/expo-camera/android/maven"
+        }
         google()
         jcenter()
     }
@@ -25,6 +31,8 @@ allprojects {
         mavenLocal()
         google()
         jcenter()
+                maven { url "https://jitpack.io" }
+
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -36,4 +44,15 @@ allprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
     distributionUrl = distributionUrl.replace("bin", "all")
+}
+
+subprojects {
+  project.configurations.all {
+    resolutionStrategy.eachDependency { details ->
+      if (details.requested.group == 'com.android.support'
+          && !details.requested.name.contains('multidex') ) {
+        details.useVersion "27.0.1"
+      }
+    }
+  }
 }

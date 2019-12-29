@@ -78,5 +78,12 @@
 	<string>Give projetoIssue periences permission to access your photos</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Allow projetoIssue to access your reminders</string>
+	
+		<key>NSCameraUsageDescription</key>
+    <string>Permitir acesso à camera de seu dispositivo</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Permitir acesso ao rolo de camera de seu dispositivo</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Permitir acesso ao microfone de seu dispositivo</string>
 </dict>
 </plist>
