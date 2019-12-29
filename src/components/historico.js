@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, Picker, Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, Button, Picker, Alert } from 'react-native';
 import { render } from 'react-dom';
-
+import DdCda from './ddCda'
 export default class Historico extends Component {
 
     state = {
@@ -14,19 +14,17 @@ export default class Historico extends Component {
         ],
     };
 
-    Item({ title }) {
-        return (
-            <View style={styles.item}>
-                <Text style={styles.title}>{title}</Text>
-            </View>
-        );
-    }
 
     renderItem = ({ item }) => (
         <View style={styles.listItem}>
             <Text>{item.full_name}</Text>
         </View>
     );
+
+    // logar = () =>{
+    //     this.state.cda = this.props.getParam('language');
+    //     console.log(this.state)
+    // }
 
     render() {
         const { navigation } = this.props;
@@ -36,6 +34,7 @@ export default class Historico extends Component {
         return (
             <SafeAreaView style={styles.container}>
 
+                {/* <DdCda /> */}
                 <Text>CDA Selecionado</Text>
                 <Picker placeholder="CDA" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
                     <Picker.Item label="Java" value="java" />
@@ -47,6 +46,8 @@ export default class Historico extends Component {
                     renderItem={this.renderItem}
                     keyExtractor={item => item.id}
                 />
+
+                {/* <Button  onPress={() => this.logar()} title="Salva" /> */}
             </SafeAreaView>
         );
     };
