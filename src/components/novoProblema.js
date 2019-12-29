@@ -41,11 +41,12 @@ export default class NovoProblema extends Component {
 
 
     // ImagePicker.launchImageLibraryAsync(
-      let result = await ImagePicker.launchImageLibraryAsync({
+      let result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
+        allowsEditing: false,
         aspect: [4, 3],
-        quality: 1
+        quality: 1,
+        base64:true,
       });
   
       console.log(result);
