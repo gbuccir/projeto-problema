@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Picker, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Picker, Alert, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ManutencaoEnum from '../utils/enums'
-import { RNCamera } from 'react-native-camera';
-import { withNavigationFocus } from 'react-navigation'
+// import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 
-import * as Permissions from 'expo-permissions';
+// const ImagePicker = require('react-native-image-picker');
+// import { RNCamera } from 'react-native-camera';
+
+// import * as Permissions from 'expo-permissions';
 // import {PermissionsAndroid} from 'react-native';
-
-
 
 
 export default class NovoProblema extends Component {
@@ -32,25 +33,48 @@ export default class NovoProblema extends Component {
   }
 
 
-  tiraFoto = () => {
-    RNCamera.Constants.CameraStatus = 'READY';
-    RNCamera.Constants.RecordAudioPermissionStatus = 'AUTHORIZED';
-    const granted = Permissions.askAsync(Permissions.WRITE_EXTERNAL_STORAGE);
-    this.render();
+  tiraFoto = async () => {
+
+    const options = {
+      base64:true
+    };
+
+
+    // ImagePicker.launchImageLibraryAsync(
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1
+      });
+  
+      console.log(result);
+  
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
+      }
+    
+    // );
+    // RNCamera.Constants.CameraStatus = 'READY';
+    // RNCamera.Constants.RecordAudioPermissionStatus = 'AUTHORIZED';
+    // const granted = Permissions.askAsync(Permissions.WRITE_EXTERNAL_STORAGE);
+    // this.render();
   }
 
   takePicture = async () => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options)
-      alert(data.uri);
-    }
+
+    // if (this.camera) {
+    //   const options = { quality: 0.5, base64: true };
+    //   const data = await this.camera.takePictureAsync(options)
+    //   alert(data.uri);
+    // }
   }
 
 
   render() {
     const { navigation } = this.props;
     const usuario = navigation.getParam('login');
+    let { image } = this.state;
 
     return (
       <View style={styles.container}>
@@ -67,15 +91,15 @@ export default class NovoProblema extends Component {
         <Button title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
         <Button title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} />
 
-        <Text>Se quiser tire uma foto </Text>
-        <RNCamera
+        <Text>Se quiser escolhacl uma foto </Text>
+        {/* <RNCamera
           // ref={camera => { this.xamera = camera }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
           autoFocus={RNCamera.Constants.AutoFocus.on}
           flashMode={RNCamera.Constants.FlashMode.off}
 
-        />
+        /> */}
 
         {/* 
 androidCameraPermissionOptions={ title= "Permitir camera",
@@ -83,7 +107,8 @@ androidCameraPermissionOptions={ title= "Permitir camera",
             buttonPositive= "ok",
             buttonNegative= "cancelar"} */}
 
-
+{image &&
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         <View >
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
             <Text style={styles.buttonText}> SNAP </Text>

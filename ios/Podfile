@@ -34,4 +34,6 @@ target 'projetoIssue' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
 end
