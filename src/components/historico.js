@@ -6,11 +6,11 @@ export default class Historico extends Component {
 
     state = {
         data: [
-            { id: 0, full_name: 'Repo 1' },
-            { id: 1, full_name: 'Repo 2' },
-            { id: 2, full_name: 'Repo 3' },
-            { id: 3, full_name: 'Repo 4' },
-            { id: 4, full_name: 'Repo 5' },
+            { id: 0, full_name: 'Problema 1' },
+            { id: 1, full_name: 'Problema 2' },
+            { id: 2, full_name: 'Problema 3' },
+            { id: 3, full_name: 'Problema 4' },
+            { id: 4, full_name: 'Problema 5' },
         ],
     };
 
@@ -37,8 +37,8 @@ export default class Historico extends Component {
                 {/* <DdCda /> */}
                 <Text>CDA Selecionado</Text>
                 <Picker placeholder="CDA" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
+                    <Picker.Item label="CDA 1" value="java" />
+                    <Picker.Item label="CDA 2" value="js" />
                 </Picker>
 
                 <FlatList

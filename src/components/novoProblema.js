@@ -64,8 +64,8 @@ export default class NovoProblema extends Component {
       <View style={styles.container}>
         <Text>Escolha o CDA</Text>
           <Picker placeholder="CDA selecionado" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
+            <Picker.Item label="CDA 1" value="java" />
+            <Picker.Item label="CDA 2" value="js" />
           </Picker>
 
         <Text>Qual problema ? </Text>

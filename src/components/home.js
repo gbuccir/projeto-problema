@@ -6,14 +6,14 @@ import { render } from 'react-dom';
 export default class Home extends Component {
 
   irParaHistorico = (user) => {
-    this.props.navigation.navigate('Historico' , {login: user});
+    this.props.navigation.navigate('Historico', { login: user });
   }
 
   state = {
   }
 
   irParaNovo = (user) => {
-    this.props.navigation.navigate('NovoProblema', {login:user});
+    this.props.navigation.navigate('NovoProblema', { login: user });
   }
 
   render() {
@@ -22,15 +22,15 @@ export default class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{usuario}</Text>
-        <Button
+        <Text style={styles.userlogado}>{usuario}</Text>
+        <Button style={styles.opcoes}
           title="Criar novo problema"
-          color="#f194ff"
+          color="#d5d900"
           onPress={() => this.irParaNovo(usuario)} />
 
-        <Button
+        <Button style={styles.opcoes}
           title="Histórico"
-          color="#f194ff"
+          color="#d5d900"
           onPress={() => this.irParaHistorico(usuario)} />
       </View>
     );
@@ -40,9 +40,16 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: '#00530d',
     color: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  userlogado: {
+    position: 'absolute',
+    top: 0,
+  },
+  opcoes: {
+    margin: 10
+  }
 });

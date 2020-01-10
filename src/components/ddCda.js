@@ -11,8 +11,8 @@ export default class DdCda extends Component {
             <View>
                 <Text>CDA Selecionado</Text>
                 <Picker placeholder="CDA" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
+                    <Picker.Item label="CDA 1" value="java" />
+                    <Picker.Item label="CDA 2" value="js" />
                 </Picker>
             </View>
         )
