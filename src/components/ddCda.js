@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, Picker, Alert } from 'react-native';
-import { render } from 'react-dom';
+import { StyleSheet, Text, View, Picker } from 'react-native';
+
 
 export default class DdCda extends Component {
 
@@ -14,7 +14,7 @@ export default class DdCda extends Component {
                 <Picker.Item label="CDA SALVADOR BR" value="1" />
                     <Picker.Item label="CDA SALVADOR CENTRO" value="2" />
                     <Picker.Item label="DF GOIANIA" value="3" />
-                    <Picker.Item label="CDG BENEVIDES" value="4" />
+                    <Picker.Item label="CDA BENEVIDES" value="4" />
                     <Picker.Item label="CDA BRASILIA" value="5" />
                     <Picker.Item label="OPERADOR LOGÍSTICO MACAPÁ" value="6" />
                     <Picker.Item label="OPERADOR LOGÍSTICO MANAUS" value="7" />
