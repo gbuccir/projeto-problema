@@ -32,13 +32,7 @@ export default class Login extends Component {
         {/* <Text style={styles.titulo} >Manutenção HNK</Text> */}
         <TextInput value={this.state.mail} onChangeText={text => this.state.mail = text} style={styles.input} secureTextEntry={false} placeholder="Login" />
         <TextInput value={this.state.senha} onChangeText={text => this.state.senha = text} style={styles.input} secureTextEntry={true} placeholder="Senha" />
-        {/* <Button
-          title="Entrar"
-          color="#205527"
-          style={styles.entrar}
-          onPress={() => this.logar()} /> */}
-
-
+        
         <TouchableOpacity style={styles.entrar} onPress={() => this.logar()} >
           <Text style={styles.buttonText}> Entrar </Text>
         </TouchableOpacity>
@@ -70,7 +64,7 @@ const styles = StyleSheet.create({
   imagem: {
     display: "flex",
     flexShrink: 1,
-    flexGrow: 0.4,
+    flexGrow: 0.42,
     overflow: "visible",
     width: 320,
     height: 200,
