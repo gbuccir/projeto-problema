@@ -76,8 +76,12 @@ const styles = StyleSheet.create({
     backgroundColor:"#205527",
     padding:10,
     borderRadius:5,
+    fontSize:16,
+    width:200,
+    textAlign:"center",
   },
   buttonText:{
     color:"#fff",
+    textAlign:"center",
   }
 });

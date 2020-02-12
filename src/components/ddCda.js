@@ -4,14 +4,14 @@ import { StyleSheet, Text, View, Picker } from 'react-native';
 
 export default class DdCda extends Component {
 
-    state ={}
+    state = {}
 
     render() {
         return (
-            <View>
-                <Text>CDA Selecionado</Text>
-                <Picker placeholder="CDA" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-                <Picker.Item label="CDA SALVADOR BR" value="1" />
+            <View style={styles.container}>
+                <Text style={styles.label} >CDA Selecionado | </Text>
+                <Picker style={styles.picker} placeholder="CDA" selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+                    <Picker.Item label="CDA SALVADOR BR" value="1" />
                     <Picker.Item label="CDA SALVADOR CENTRO" value="2" />
                     <Picker.Item label="DF GOIANIA" value="3" />
                     <Picker.Item label="CDA BENEVIDES" value="4" />
@@ -46,3 +46,21 @@ export default class DdCda extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    label: {
+        width: 110,        
+    },
+    picker: {
+        width: 210,
+        fontSize: 14,
+    },
+    container: {
+        width: 330,
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignItems: "center",
+        borderWidth: 1,
+    }
+})

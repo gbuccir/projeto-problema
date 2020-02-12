@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexGrow: 0.46,
     overflow: "visible",
-    width: 320,
+    width: 330,
     height: 250,
     position: "relative",
     top: -70,
