@@ -25,8 +25,11 @@ export default class Home extends Component {
         <Image resizeMode='cover' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
         {/* <Text style={styles.userlogado}>{usuario}</Text> */}
 
+        <Text style={[styles.subheader]}>Bem-vindo {usuario}</Text>
+        <Text style={[styles.subheaderdois]}>O que gostaria de fazer ?</Text>
+
         <TouchableOpacity style={styles.opcoes} onPress={() => this.irParaNovo(usuario)} >
-          <Text style={styles.buttonText}> Criar novo problema</Text>
+          <Text style={styles.buttonText}> Reportar problema</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.opcoes} onPress={() => this.irParaHistorico(usuario)} >
@@ -49,12 +52,12 @@ const styles = StyleSheet.create({
   imagem: {
     display: "flex",
     flexShrink: 1,
-    flexGrow: 0.35,
+    flexGrow: 0.46,
     overflow: "visible",
     width: 320,
-    height: 200,
+    height: 250,
     position: "relative",
-    top: -90,
+    top: -70,
   },
   userlogado: {
     position: 'absolute',
@@ -66,13 +69,26 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     width: 200,
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    textAlign:"center"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center"
   },
   buttonText: {
     color: "#fff",
-    fontSize:18
+    fontSize: 18
+  },
+  subheader: {
+    fontWeight: "bold",
+    fontSize: 30,
+    position: "relative",
+    top: -30,
+    marginBottom: 10,
+  },
+  subheaderdois: {
+    fontSize: 20,
+    position: "relative",
+    top: -30,
+    
   }
 });
