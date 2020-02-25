@@ -12,45 +12,46 @@ export default class Historico extends Component {
             { id: 3, full_name: 'Problema 4' },
             { id: 4, full_name: 'Problema 5' },
         ],
-        modalVisible: false
+        modalVisible: false,
+        corDoProblema: "",
+        modalItem: {}
     };
 
     abrirDetalhes = () => {
         console.log(this.state.modalVisible)
-        // this.state.modalVisible = true;
         this.setState({ modalVisible: true });
         console.log(this.state.modalVisible)
     }
 
 
-    setModalVisible(visible) {
-        console.log(this.state.modalVisible)
+    setModalVisible(visible, item) {
+        // console.log(this.state.modalVisible)
+        console.log(item);
+        console.log(this.state.modalItem);
         this.setState({ modalVisible: visible });
-        console.log(this.state.modalVisible)
+        this.setState({ modalItem: item })
+        console.log(this.state.modalItem)
+        // console.log(this.state.modalVisible)
     }
 
 
-
     renderItem = ({ item }) => (
-        <View style={styles.listItem}>
-            <Text>{item.full_name}</Text>
 
-            <TouchableOpacity style={styles.entrar} onPress={() => this.setModalVisible(true)} >
+        <View style={styles.listItem}>
+            {/* <View  style={styles.borda}></View> */}
+            <Text style={styles.itemName}>{item.full_name}</Text>
+
+            <TouchableOpacity style={styles.entrar} onPress={(item) => this.setModalVisible(true, item)} >
                 <Text style={styles.buttonText}> Entrar </Text>
             </TouchableOpacity>
 
         </View>
     );
 
-    // logar = () =>{
-    //     this.state.cda = this.props.getParam('language');
-    //     console.log(this.state)
-    // }
 
     render() {
         const { navigation } = this.props;
         const usuario = navigation.getParam('login');
-        // this.state.modalVisible = false;
 
         return (
 
@@ -65,11 +66,11 @@ export default class Historico extends Component {
                     }}>
                     <View style={{ marginTop: 22 }}>
                         <View>
-                            <Text>Hello World!</Text>
+                            <Text>{this.state.modalItem.full_name}!</Text>
 
                             <TouchableHighlight
                                 onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
+                                    this.setModalVisible(!this.state.modalVisible, {});
                                 }}>
                                 <Text>Hide Modal</Text>
                             </TouchableHighlight>
@@ -104,10 +105,27 @@ const styles = StyleSheet.create({
     list: {
         paddingHorizontal: 20,
     },
-
     listItem: {
-        backgroundColor: '#EEE',
+        backgroundColor: '#205527',
         marginTop: 20,
         padding: 30,
+        width: 300,
+
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+
+
     },
+    itemName: {
+        color: "#fff",
+        alignItems: "flex-start",
+    },
+    entrar: {
+        alignItems: "flex-end",
+        alignSelf: "flex-end"
+
+    },
+    buttonText: {
+        color: "#fff"
+    }
 });

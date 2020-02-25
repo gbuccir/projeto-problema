@@ -49,10 +49,11 @@ export default class DdCda extends Component {
 
 const styles = StyleSheet.create({
     label: {
-        width: 110,        
+        width: 115,        
+        marginLeft:8,
     },
     picker: {
-        width: 210,
+        width: 205,
         fontSize: 14,
     },
     container: {
