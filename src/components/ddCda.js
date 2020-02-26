@@ -63,5 +63,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: "center",
         borderWidth: 1,
+        marginTop:20,
     }
 })

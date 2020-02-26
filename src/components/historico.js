@@ -6,11 +6,11 @@ export default class Historico extends Component {
 
     state = {
         data: [
-            { id: 0, full_name: 'Problema 1' },
-            { id: 1, full_name: 'Problema 2' },
-            { id: 2, full_name: 'Problema 3' },
-            { id: 3, full_name: 'Problema 4' },
-            { id: 4, full_name: 'Problema 5' },
+            { id: 0, full_name: 'Problema 1', tipo: "Manutencao" },
+            { id: 1, full_name: 'Problema 2', tipo: "Preventiva" },
+            { id: 2, full_name: 'Problema 3', tipo: "Manutencao" },
+            { id: 3, full_name: 'Problema 4', tipo: "Preventiva" },
+            { id: 4, full_name: 'Problema 5', tipo: "Preventiva" },
         ],
         modalVisible: false,
         corDoProblema: "",
@@ -25,13 +25,8 @@ export default class Historico extends Component {
 
 
     setModalVisible(visible, item) {
-        // console.log(this.state.modalVisible)
-        console.log(item);
-        console.log(this.state.modalItem);
         this.setState({ modalVisible: visible });
         this.setState({ modalItem: item })
-        console.log(this.state.modalItem)
-        // console.log(this.state.modalVisible)
     }
 
 
@@ -40,11 +35,11 @@ export default class Historico extends Component {
         <View style={styles.listItem}>
             {/* <View  style={styles.borda}></View> */}
             <Text style={styles.itemName}>{item.full_name}</Text>
+            <Text style={styles.itemTipo}>{item.tipo}</Text>
 
-            <TouchableOpacity style={styles.entrar} onPress={(item) => this.setModalVisible(true, item)} >
+            <TouchableOpacity style={styles.entrar} onPress={this.setModalVisible.bind(this, true, item)} >
                 <Text style={styles.buttonText}> Entrar </Text>
             </TouchableOpacity>
-
         </View>
     );
 
@@ -56,7 +51,6 @@ export default class Historico extends Component {
         return (
 
             <>
-
                 <Modal
                     animationType="slide"
                     transparent={false}
@@ -80,7 +74,6 @@ export default class Historico extends Component {
 
                 <SafeAreaView style={styles.container}>
                     <DdCda />
-
                     <FlatList
                         data={this.state.data}
                         renderItem={this.renderItem}
@@ -127,5 +120,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#fff"
+    },
+    itemTipo: {
+        position: "relative",
+        bottom: 0,
+        color: "#fff",
     }
 });
