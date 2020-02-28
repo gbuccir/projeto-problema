@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Picker, Alert, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ManutencaoEnum from '../utils/enums'
 import * as ImagePicker from 'expo-image-picker';
-
+import DdCda from './ddCda';
 
 export default class NovoProblema extends Component {
-
 
   state = {
     problema: {
@@ -23,6 +22,7 @@ export default class NovoProblema extends Component {
 
   salvar = () => {
     this.state.idUsuario = this.props.navigation.getParam('login');
+    Alert.alert("Salvo com sucesso!");
   }
 
 
@@ -50,11 +50,6 @@ export default class NovoProblema extends Component {
 
   }
 
-  takePicture = async () => {
-
-  }
-
-
   render() {
     const { navigation } = this.props;
     const usuario = navigation.getParam('login');
@@ -62,38 +57,9 @@ export default class NovoProblema extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Escolha o CDA</Text>
-        <Picker placeholder="CDA selecionado" style={{ height: 50, width: 100 }} selectedValue={this.state.language} onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-          <Picker.Item label="CDA SALVADOR BR" value="1" />
-          <Picker.Item label="CDA SALVADOR CENTRO" value="2" />
-          <Picker.Item label="DF GOIANIA" value="3" />
-          <Picker.Item label="CDG BENEVIDES" value="4" />
-          <Picker.Item label="CDA BRASILIA" value="5" />
-          <Picker.Item label="OPERADOR LOGÍSTICO MACAPÁ" value="6" />
-          <Picker.Item label="OPERADOR LOGÍSTICO MANAUS" value="7" />
-          <Picker.Item label="PDA ANAPOLIS" value="8" />
-          <Picker.Item label="CDA SÃO LUÍS" value="9" />
-          <Picker.Item label="CDA FORTALEZA" value="10" />
-          <Picker.Item label="CDA NATAL" value="11" />
-          <Picker.Item label="CDA RECIFE" value="12" />
-          <Picker.Item label="PDA JABOATÃO" value="13" />
-          <Picker.Item label="DP RIO DE JANEIRO - PDA Jacarepagua" value="14" />
-          <Picker.Item label="DP RIO DE JANEIRO - EV São Cristovão" value="15" />
-          <Picker.Item label="CDA POÇOS DE CALDAS" value="16" />
-          <Picker.Item label="CDA ITU" value="17" />
-          <Picker.Item label="CDA EMBU" value="18" />
-          <Picker.Item label="CDA GUARULHOS" value="19" />
-          <Picker.Item label="CDA SACOMÃ" value="20" />
-          <Picker.Item label="CDA SANTOS" value="21" />
-          <Picker.Item label="CDA CONTAGEM" value="22" />
-          <Picker.Item label="PDA UBERLANDIA" value="23" />
-          <Picker.Item label="PDA RIBEIRÃO PRETO" value="24" />
-          <Picker.Item label="CDA ITAJAÍ" value="25" />
-          <Picker.Item label="CDA SÃO JOSÉ" value="26" />
-          <Picker.Item label="CDA PORTO ALEGRE" value="27" />
-          <Picker.Item label="CDA CURITIBA" value="28" />
-          <Picker.Item label="PDA BLUMENAU" value="29" />
-        </Picker>
+        <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+
+        <DdCda />
 
         <Text>Qual problema ? </Text>
         <TextInput value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
@@ -108,15 +74,19 @@ export default class NovoProblema extends Component {
         {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         <View >
-          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
+          <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.capture}>
             <Text style={styles.buttonText}> SNAP </Text>
           </TouchableOpacity>
         </View>
 
-        <Button title="Salvar" onPress={() => this.tiraFoto()} />
+        <Button title="Salvar" onPress={() => this.salvar()} />
       </View >
     );
   };
+}
+
+NovoProblema.navigationOptions = {
+  title: 'Novo Problema',
 }
 
 const styles = StyleSheet.create({
@@ -150,5 +120,17 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 14
-  }
+  },
+  imagem: {
+    display: "flex",
+    flexShrink: 1,
+    flexGrow: 0.46,
+    overflow: "visible",
+    width: 330,
+    height: 250,
+    position: "relative",
+    top: -35,
+    left: 0,
+    marginBottom: -20
+  },
 });

@@ -13,15 +13,24 @@ const MainNav = createStackNavigator(
         },
         Home:{
             screen:Home,
-            title:"Home"
+            title:"Home",
+            defaultNavigationOptions: {
+                title: 'Home',
+              }
         },
         NovoProblema:{
             screen:NovoProblema,
-            title:"Criando novo problema"
+            title:"Criando novo problema",
+            defaultNavigationOptions: {
+                title:"Criando novo problema",
+              }
         },
         Historico:{
             screen:Historico,
-            title:"Historico de problemas"
+            title:"Historico de problemas",
+            defaultNavigationOptions: {
+                title:"Historico de problemas",
+              }
         },
     }
 )

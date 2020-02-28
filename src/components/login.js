@@ -6,11 +6,11 @@ export default class Login extends Component {
   }
 
   logar = () => {
-    if (this.state.mail == null || this.state.mail == '')
-      Alert.alert("Preencha o login");
-    else if (this.state.senha == null || this.state.senha == '')
-      Alert.alert("Preencha a senha");
-    else
+    // if (this.state.mail == null || this.state.mail == '')
+    //   Alert.alert("Preencha o login");
+    // else if (this.state.senha == null || this.state.senha == '')
+    //   Alert.alert("Preencha a senha");
+    // else
       this.props.navigation.navigate('Home', { login: this.state.mail });
   }
 

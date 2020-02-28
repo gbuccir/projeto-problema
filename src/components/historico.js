@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal, Image } from 'react-native';
 import DdCda from './ddCda'
 
 export default class Historico extends Component {
@@ -66,11 +66,13 @@ export default class Historico extends Component {
                                 onPress={() => {
                                     this.setModalVisible(!this.state.modalVisible, {});
                                 }}>
-                                <Text>Hide Modal</Text>
+                                <Text>Fechar</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
                 </Modal>
+
+                <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
 
                 <SafeAreaView style={styles.container}>
                     <DdCda />
@@ -86,6 +88,11 @@ export default class Historico extends Component {
         );
     };
 }
+
+Historico.navigationOptions = {
+    title: "Histórico"
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -103,27 +110,43 @@ const styles = StyleSheet.create({
         marginTop: 20,
         padding: 30,
         width: 300,
-
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-
-
+        // flexWrap: 'wrap',
+        // flexDirection: 'row',
     },
     itemName: {
         color: "#fff",
-        alignItems: "flex-start",
+        position: "absolute",
+        top: 10,
+        left: 10,
+        textAlign: "center",
     },
     entrar: {
-        alignItems: "flex-end",
-        alignSelf: "flex-end"
-
+        position: "absolute",
+        top: 15,
+        right: 10,
+        backgroundColor: "#C3C3C3",
+        padding: 5,
     },
     buttonText: {
         color: "#fff"
     },
     itemTipo: {
-        position: "relative",
-        bottom: 0,
+        position: "absolute",
+        top: 35,
+        left: 10,
+        fontSize: 12,
         color: "#fff",
-    }
+    },
+    imagem: {
+        display: "flex",
+        flexShrink: 1,
+        flexGrow: 0.25,
+        overflow: "visible",
+        width: 230,
+        height: 50,
+        position: "relative",
+        top: -20,
+        left: 60,
+        marginBottom: -40
+    },
 });
