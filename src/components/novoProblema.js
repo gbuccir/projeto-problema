@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image,SafeAreaView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ManutencaoEnum from '../utils/enums'
 import * as ImagePicker from 'expo-image-picker';
@@ -56,31 +56,37 @@ export default class NovoProblema extends Component {
     let { image } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
 
         <DdCda />
 
-        <Text>Qual problema ? </Text>
-        <TextInput value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
-
-        <Text>Tipo de manutenção? </Text>
-        <Button title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
-        <Button title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} />
-
-        <Text>Se quiser escolha uma foto </Text>
-
-
-        {image &&
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <Text style={styles.txtOrientacao}>Se quiser escolha uma foto </Text>
+        <View style={styles.estiloImagem}>
+          {/* {image && */}
+          <View style={{borderWidth: 1}}>
+            <Image source={{ uri: image }} style={styles.captura} />
+        </View>
+        {/* } */}
         <View >
-          <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.capture}>
-            <Text style={styles.buttonText}> SNAP </Text>
+          <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.botao}>
+            <Text style={styles.buttonText}> Escolher </Text>
           </TouchableOpacity>
         </View>
+      </View>
 
-        <Button title="Salvar" onPress={() => this.salvar()} />
-      </View >
+      <Text style={styles.txtOrientacao}>Qual problema ? </Text>
+      <TextInput style={styles.input} value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
+
+
+      <Text style={styles.txtOrientacao}>Tipo de manutenção? </Text>
+      <View style={styles.estiloImagem}>
+        <Button title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
+        <Button title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} />
+      </View>
+
+      <Button style={styles.botao} title="Salvar" onPress={() => this.salvar()} />
+      </SafeAreaView >
     );
   };
 }
@@ -97,29 +103,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  preview: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    height: 500,
-    width: 500,
-  },
-  buttonContainer: {
-    flex: 0,
-    flexDirection: "row",
-    justifyContent: "center"
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: "center",
-    margin: 20
-  },
   buttonText: {
-    fontSize: 14
+    color: "#fff",
+    fontSize: 16,
   },
   imagem: {
     display: "flex",
@@ -131,6 +117,48 @@ const styles = StyleSheet.create({
     position: "relative",
     top: -35,
     left: 0,
-    marginBottom: -20
+    marginBottom: -30,
+  },
+  txtOrientacao: {
+    fontSize: 16,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  botao: {
+    marginTop: 15,
+    backgroundColor: "#205527",
+    padding: 5,
+    borderRadius: 5,
+    width: 100,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    marginLeft:10,
+  },
+  captura: {
+    width: 200,
+    height: 200,
+    borderWidth: 1,
+  },
+  estiloImagem: {
+    width: 330,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: "center",
+    borderWidth: 1,
+    textAlign:"center",
+    justifyContent:"space-around"
+  },
+  input: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    height: 40,
+    width: 200,
+    marginBottom: 10,
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#333',
+    paddingLeft: 5,
   },
 });
