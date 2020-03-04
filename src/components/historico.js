@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal, Image, LayoutAnimation } from 'react-native';
 import DdCda from './ddCda'
+import ManutencaoEnum from '../utils/enums'
 
 export default class Historico extends Component {
 
     state = {
         data: [
-            { id: 0, full_name: 'Problema 1', tipo: "Manutencao" },
-            { id: 1, full_name: 'Problema 2', tipo: "Preventiva" },
-            { id: 2, full_name: 'Problema 3', tipo: "Manutencao" },
-            { id: 3, full_name: 'Problema 4', tipo: "Preventiva" },
-            { id: 4, full_name: 'Problema 5', tipo: "Preventiva" },
+            { id: 0, full_name: 'Problema 1', tipo: "Corretiva", tipoEnum: 2, descricao: "a casa caiu!!!", imagem: "" },
+            { id: 1, full_name: 'Problema 2', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 2, full_name: 'Problema 3', tipo: "Corretiva", tipoEnum: 2, Descricao: "", Imagem: "" },
+            { id: 3, full_name: 'Problema 4', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 4, full_name: 'Problema 5', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
         ],
         modalVisible: false,
         corDoProblema: "",
         modalItem: {}
     };
+
+    componentDidMount() {
+          LayoutAnimation.easeInEaseOut();
+      }
 
     abrirDetalhes = () => {
         console.log(this.state.modalVisible)
@@ -27,11 +32,11 @@ export default class Historico extends Component {
     setModalVisible(visible, item) {
         this.setState({ modalVisible: visible });
         this.setState({ modalItem: item })
+        // Alert.alert("chamou");
     }
 
 
     renderItem = ({ item }) => (
-
         <View style={styles.listItem}>
             {/* <View  style={styles.borda}></View> */}
             <Text style={styles.itemName}>{item.full_name}</Text>
@@ -51,23 +56,59 @@ export default class Historico extends Component {
         return (
 
             <>
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                    }}>
-                    <View style={{ marginTop: 22 }}>
+                <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                }}>
+                    <View style={styles.viewModal}>
                         <View>
-                            <Text>{this.state.modalItem.full_name}!</Text>
+                            <Text style={styles.Titulo}>{this.state.modalItem.full_name}!</Text>
 
-                            <TouchableHighlight
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible, {});
-                                }}>
-                                <Text>Fechar</Text>
-                            </TouchableHighlight>
+                            <View style={styles.estiloImagem}>
+                                {this.state.modalItem.image &&
+                                    <View style={{ borderWidth: 1 }}>
+                                        <Image source={{ uri: image }} style={styles.captura} />
+                                    </View>
+                                }
+
+                                {!this.state.modalItem.image &&
+                                    <View style={{ borderWidth: 1 }}>
+                                        <Text>Nenhuma imagem cadastrada.</Text>
+                                    </View>
+                                }
+                            </View>
+
+                            <Text style={styles.txtOrientacao}>Qual problema: </Text>
+                            <Text style={styles.txtDescricao}>{this.state.modalItem.descricao} </Text>
+
+
+                            <Text style={styles.txtOrientacao}>Tipo de manutenção: </Text>
+
+
+                            <View style={styles.estiloImagem}>
+
+                                {this.state.modalItem.tipoEnum == ManutencaoEnum.Preventiva &&
+                                    <View style={styles.tipoPreventiva}>
+
+                                        <Text style={styles.buttonText}> Preventiva </Text>
+                                    </View>
+                                }
+
+                                {this.state.modalItem.tipoEnum == ManutencaoEnum.Corretiva &&
+                                    <View style={styles.tipoCorrecao}>
+                                        <Text style={styles.buttonText}> Corretiva </Text>
+                                    </View>
+                                }
+                            </View>
+
+
+                            <View style={styles.estiloImagem}>
+                                <TouchableHighlight style={styles.fechar}
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible, {});
+                                    }}>
+                                    <Text style={styles.buttonText}>Fechar</Text>
+                                </TouchableHighlight>
+                            </View>
                         </View>
                     </View>
                 </Modal>
@@ -79,7 +120,9 @@ export default class Historico extends Component {
                     <FlatList
                         data={this.state.data}
                         renderItem={this.renderItem}
-                        keyExtractor={item => item.id} />
+                        keyExtractor={(item, index) => item.id.toString()}
+                        />
+                        {/* keyExtractor={item => item.id} */}
 
                     {/* <Button  onPress={() => this.logar()} title="Salva" /> */}
                 </SafeAreaView>
@@ -149,4 +192,66 @@ const styles = StyleSheet.create({
         left: 60,
         marginBottom: -40
     },
+    tipoPreventiva: {
+        backgroundColor: "#e6d712",
+        padding: 5,
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        width: 100,
+    },
+    tipoCorrecao: {
+        backgroundColor: "#e30e0e",
+        padding: 5,
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        width: 100,
+    },
+    viewModal: {
+        marginTop: 22,
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    Titulo: {
+        fontWeight: "bold",
+        fontSize: 20,
+        textAlign: "center",
+    },
+    estiloImagem: {
+        width: 330,
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        alignItems: "center",
+        marginTop: 20,
+        marginBottom: 40,
+        textAlign: "center",
+        justifyContent: "space-around"
+    },
+    txtOrientacao: {
+        fontSize: 16,
+        marginTop: 5,
+        marginBottom: 5,
+        textAlign: "center",
+        fontWeight: "bold",
+    },
+    fechar: {
+        backgroundColor: "#205527",
+        padding: 5,
+        borderRadius: 5,
+        width: 100,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginLeft: 10,
+        position: "relative",
+        top: 180,
+    },
+    txtDescricao: {
+        textAlign: "center",
+        marginBottom: 10,
+    }
 });
