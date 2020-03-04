@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image,SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import ManutencaoEnum from '../utils/enums'
 import * as ImagePicker from 'expo-image-picker';
@@ -21,8 +21,15 @@ export default class NovoProblema extends Component {
   }
 
   salvar = () => {
-    this.state.idUsuario = this.props.navigation.getParam('login');
-    Alert.alert("Salvo com sucesso!");
+    // this.state.idUsuario = this.props.navigation.getParam('login');
+    if (!this.state.correcaoTipo)
+      Alert.alert("Escolha um tipo de manutenção!");
+    else if (!this.state.descricao)
+      Alert.alert("Descreva brevemente o problema.");
+    else{
+      Alert.alert("Salvo com sucesso!");
+      this.props.navigation.navigate('Home', { login: this.props.navigation.getParam('login') });
+    }
   }
 
 
@@ -56,36 +63,52 @@ export default class NovoProblema extends Component {
     let { image } = this.state;
 
     return (
-      <SafeAreaView style={styles.container}>
-        <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+      <SafeAreaView >
+        <ScrollView >
+          <View style={styles.container}>
+            <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
 
-        <DdCda />
+            <DdCda />
 
-        <Text style={styles.txtOrientacao}>Se quiser escolha uma foto </Text>
-        <View style={styles.estiloImagem}>
-          {/* {image && */}
-          <View style={{borderWidth: 1}}>
-            <Image source={{ uri: image }} style={styles.captura} />
-        </View>
-        {/* } */}
-        <View >
-          <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.botao}>
-            <Text style={styles.buttonText}> Escolher </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            <Text style={styles.txtOrientacao}>Se quiser escolha uma foto </Text>
+            <View style={styles.estiloImagem}>
+              {/* {image && */}
+              <View style={{ borderWidth: 1 }}>
+                <Image source={{ uri: image }} style={styles.captura} />
+              </View>
+              {/* } */}
+              <View >
+                <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.botao}>
+                  <Text style={styles.buttonText}> Escolher </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
 
-      <Text style={styles.txtOrientacao}>Qual problema ? </Text>
-      <TextInput style={styles.input} value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
+            <Text style={styles.txtOrientacao}>Qual problema ? </Text>
+            <TextInput style={styles.input} value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
 
 
-      <Text style={styles.txtOrientacao}>Tipo de manutenção? </Text>
-      <View style={styles.estiloImagem}>
-        <Button title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
-        <Button title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} />
-      </View>
+            <Text style={styles.txtOrientacao}>Tipo de manutenção? </Text>
+            <View style={styles.estiloImagem}>
 
-      <Button style={styles.botao} title="Salvar" onPress={() => this.salvar()} />
+              <TouchableOpacity onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} style={styles.tipoPreventiva}>
+                <Text style={styles.buttonText}> Preventiva </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} style={styles.tipoCorrecao}>
+                <Text style={styles.buttonText}> Corretiva </Text>
+              </TouchableOpacity>
+              {/* 
+            <Button style={styles.tipoPreventiva} title="Preventiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Preventiva)} />
+            <Button style={styles.tipoCorrecao} title="Corretiva" onPress={() => this.setTipoManutencao(ManutencaoEnum.Corretiva)} /> */}
+            </View>
+
+
+            <TouchableOpacity onPress={() => this.salvar()} style={styles.Save}>
+              <Text style={styles.buttonText}> Salvar </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </SafeAreaView >
     );
   };
@@ -106,6 +129,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 16,
+    textAlign: "center"
   },
   imagem: {
     display: "flex",
@@ -134,7 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    marginLeft:10,
+    marginLeft: 10,
   },
   captura: {
     width: 200,
@@ -146,9 +170,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: "center",
-    borderWidth: 1,
-    textAlign:"center",
-    justifyContent:"space-around"
+    marginTop: 20,
+    marginBottom: 40,
+    textAlign: "center",
+    justifyContent: "space-around"
   },
   input: {
     borderRadius: 5,
@@ -161,4 +186,30 @@ const styles = StyleSheet.create({
     borderColor: '#333',
     paddingLeft: 5,
   },
+  tipoPreventiva: {
+    backgroundColor: "#e6d712",
+    padding: 5,
+    borderRadius: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  tipoCorrecao: {
+    backgroundColor: "#e30e0e",
+    padding: 5,
+    borderRadius: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  Save: {
+    backgroundColor: "#205527",
+    borderRadius: 5,
+    textAlign: "center",
+    width: 200,
+    marginTop: 35,
+    padding: 5,
+  }
 });
