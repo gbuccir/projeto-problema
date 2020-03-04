@@ -7,11 +7,14 @@ export default class Historico extends Component {
 
     state = {
         data: [
-            { id: 0, full_name: 'Problema 1', tipo: "Corretiva", tipoEnum: 2, descricao: "a casa caiu!!!", imagem: "" },
-            { id: 1, full_name: 'Problema 2', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
-            { id: 2, full_name: 'Problema 3', tipo: "Corretiva", tipoEnum: 2, Descricao: "", Imagem: "" },
-            { id: 3, full_name: 'Problema 4', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
-            { id: 4, full_name: 'Problema 5', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 0, full_name: 'Vazamento no telhado', tipo: "Corretiva", tipoEnum: 2, descricao: "a casa caiu!!!", imagem: "" },
+            { id: 1, full_name: 'Infiltração na parede', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 2, full_name: 'Problema na válvula de vaso sanitário', tipo: "Corretiva", tipoEnum: 2, Descricao: "", Imagem: "" },
+            { id: 3, full_name: 'Buraco no piso', tipo: "Preventiva", tipoEnum: 1, Descricao: "Junta no piso do galpão quebrado", Imagem: "" },
+            { id: 4, full_name: 'Motor do portão quebrado', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 5, full_name: 'Sistema de hidrante não funcionando', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 6, full_name: 'Sistema de alarme de incêndio não funcionando', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 7, full_name: 'Queda de disjunto frequente', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
         ],
         modalVisible: false,
         corDoProblema: "",
