@@ -22,7 +22,7 @@ export default class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <Image resizeMode='cover' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+        <Image resizeMode='cover' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
         {/* <Text style={styles.userlogado}>{usuario}</Text> */}
 
         <Text style={[styles.subheader]}>Bem-vindo {usuario}</Text>

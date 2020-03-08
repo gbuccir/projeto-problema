@@ -116,7 +116,7 @@ export default class Historico extends Component {
                     </View>
                 </Modal>
 
-                <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+                <Image resizeMode='contain' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
 
                 <SafeAreaView style={styles.container}>
                     <DdCda />

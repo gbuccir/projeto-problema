@@ -66,7 +66,7 @@ export default class NovoProblema extends Component {
       <SafeAreaView >
         <ScrollView >
           <View style={styles.container}>
-            <Image resizeMode='contain' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+            <Image resizeMode='contain' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
 
             <DdCda />
 

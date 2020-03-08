@@ -27,7 +27,7 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
 
-        <Image resizeMode='cover' source={require('../../assets/App_logo.png')} style={[styles.imagem]} />
+        <Image resizeMode='cover' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
 
         {/* <Text style={styles.titulo} >Manutenção HNK</Text> */}
         <TextInput value={this.state.mail} onChangeText={text => this.state.mail = text} style={styles.input} secureTextEntry={false} placeholder="Login" />
