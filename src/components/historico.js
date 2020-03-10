@@ -26,16 +26,13 @@ export default class Historico extends Component {
       }
 
     abrirDetalhes = () => {
-        console.log(this.state.modalVisible)
         this.setState({ modalVisible: true });
-        console.log(this.state.modalVisible)
     }
 
 
     setModalVisible(visible, item) {
         this.setState({ modalVisible: visible });
         this.setState({ modalItem: item })
-        // Alert.alert("chamou");
     }
 
 
@@ -103,7 +100,6 @@ export default class Historico extends Component {
                                 }
                             </View>
 
-
                             <View style={styles.estiloImagem}>
                                 <TouchableHighlight style={styles.fechar}
                                     onPress={() => {
@@ -126,10 +122,8 @@ export default class Historico extends Component {
                         keyExtractor={(item, index) => item.id.toString()}
                         />
                         {/* keyExtractor={item => item.id} */}
-
                     {/* <Button  onPress={() => this.logar()} title="Salva" /> */}
                 </SafeAreaView>
-
             </>
         );
     };
@@ -156,8 +150,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         padding: 30,
         width: 300,
-        // flexWrap: 'wrap',
-        // flexDirection: 'row',
     },
     itemName: {
         color: "#fff",

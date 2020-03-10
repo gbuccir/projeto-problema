@@ -26,7 +26,7 @@ export default class NovoProblema extends Component {
       Alert.alert("Escolha um tipo de manutenção!");
     else if (!this.state.descricao)
       Alert.alert("Descreva brevemente o problema.");
-    else{
+    else {
       Alert.alert("Salvo com sucesso!");
       this.props.navigation.navigate('Home', { login: this.props.navigation.getParam('login') });
     }
@@ -34,12 +34,9 @@ export default class NovoProblema extends Component {
 
 
   tiraFoto = async () => {
-
     const options = {
       base64: true
     };
-
-
 
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -48,13 +45,10 @@ export default class NovoProblema extends Component {
       quality: 1,
       base64: true,
     });
-
-    console.log(result);
-
+    // console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
-
   }
 
   render() {
@@ -70,22 +64,29 @@ export default class NovoProblema extends Component {
 
             <DdCda />
 
-            <Text style={styles.txtOrientacao}>Se quiser escolha uma foto </Text>
-            <View style={styles.estiloImagem}>
-              {/* {image && */}
+            <Text style={styles.txtOrientacao, { marginTop: 40, fontSize: 16 }}>Se quiser escolha uma foto </Text>
+            <View style={styles.estiloFoto}>
+
               <View style={{ borderWidth: 1 }}>
-                <Image source={{ uri: image }} style={styles.captura} />
+
+                {image &&
+                  <Image source={{ uri: image }} style={styles.captura} />
+                }
+
+                {!image &&
+                  <Text style={styles.captura}>Sua imagem aparecerá aqui.</Text>
+                }
               </View>
-              {/* } */}
-              <View >
-                <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.botao}>
-                  <Text style={styles.buttonText}> Escolher </Text>
-                </TouchableOpacity>
-              </View>
+
+              <TouchableOpacity onPress={() => this.tiraFoto()} style={styles.botaoEscolher}>
+                <Text style={styles.buttonText}> Escolher </Text>
+              </TouchableOpacity>
+
             </View>
 
             <Text style={styles.txtOrientacao}>Qual problema ? </Text>
-            <TextInput style={styles.input} value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
+            <TextInput style={styles.input} multiline={true}
+              numberOfLines={4} value={this.state.descricao} onChangeText={text => this.state.descricao = text} placeholder="Descreva o problama" ></TextInput>
 
 
             <Text style={styles.txtOrientacao}>Tipo de manutenção? </Text>
@@ -160,10 +161,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 10,
   },
-  captura: {
+  botaoEscolher: {
+    marginTop: 15,
+    backgroundColor: "#205527",
+    padding: 5,
+    borderRadius: 5,
     width: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    marginLeft: 0,
+  },
+  captura: {
+    width: 330,
     height: 200,
     borderWidth: 1,
+    textAlign:"center",
+  },
+  estiloFoto: {
+    width: 330,
+    marginTop: 20,
+    marginBottom: 40,
+    textAlign: "center",
+    alignItems: "center",
   },
   estiloImagem: {
     width: 330,
@@ -179,8 +200,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
     height: 40,
-    width: 200,
+    alignSelf: 'stretch',
     marginBottom: 10,
+    margin: 10,
     marginTop: 10,
     borderWidth: 1,
     borderColor: '#333',
@@ -188,7 +210,8 @@ const styles = StyleSheet.create({
   },
   tipoPreventiva: {
     backgroundColor: "#e6d712",
-    padding: 5,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
     borderRadius: 5,
     display: "flex",
     justifyContent: "center",
@@ -197,7 +220,8 @@ const styles = StyleSheet.create({
   },
   tipoCorrecao: {
     backgroundColor: "#e30e0e",
-    padding: 5,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
     borderRadius: 5,
     display: "flex",
     justifyContent: "center",
@@ -210,6 +234,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 200,
     marginTop: 35,
-    padding: 5,
+    padding: 10,
   }
 });
