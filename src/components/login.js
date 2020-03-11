@@ -18,9 +18,7 @@ export default class Login extends Component {
   componentDidMount = () => {
     var x = Dimensions.get('window').width;
     var y = Dimensions.get('window').height;
-    console.log(x);
-    console.log(y);
-
+     Alert.alert(x.toString(), y.toString());
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal, Image, LayoutAnimation } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TouchableHighlight, Alert, Modal, Image, UIManager, LayoutAnimation } from 'react-native';
 import DdCda from './ddCda'
 import ManutencaoEnum from '../utils/enums'
 
@@ -14,7 +14,7 @@ export default class Historico extends Component {
             { id: 4, full_name: 'Motor do portão quebrado', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
             { id: 5, full_name: 'Sistema de hidrante não funcionando', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
             { id: 6, full_name: 'Sistema de alarme de incêndio não funcionando', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
-            { id: 7, full_name: 'Queda de disjunto frequente', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
+            { id: 7, full_name: 'Queda de disjuntor frequente', tipo: "Preventiva", tipoEnum: 1, Descricao: "", Imagem: "" },
         ],
         modalVisible: false,
         corDoProblema: "",
@@ -22,24 +22,28 @@ export default class Historico extends Component {
     };
 
     componentDidMount() {
-          LayoutAnimation.easeInEaseOut();
-      }
-
-    abrirDetalhes = () => {
-        this.setState({ modalVisible: true });
+        LayoutAnimation.easeInEaseOut();
     }
 
+    // componentWillUpdate() {
+    //     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    //     LayoutAnimation.easeInEaseOut();
+    // }
 
     setModalVisible(visible, item) {
+        // console.log(this.state.modalVisible)	
+
         this.setState({ modalVisible: visible });
         this.setState({ modalItem: item })
+
+        // Alert.alert("chamou");
     }
 
 
     renderItem = ({ item }) => (
         <View style={styles.listItem}>
             {/* <View  style={styles.borda}></View> */}
-            <Text style={styles.itemName}>{item.full_name}</Text>
+            <Text  numberOfLines={1} ellipsizeMode='tail' style={styles.itemName}>{item.full_name}</Text>
             <Text style={styles.itemTipo}>{item.tipo}</Text>
 
             <TouchableOpacity style={styles.entrar} onPress={this.setModalVisible.bind(this, true, item)} >
@@ -57,7 +61,7 @@ export default class Historico extends Component {
 
             <>
                 <Modal animationType="slide" transparent={false} visible={this.state.modalVisible} onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
+                    this.setModalVisible(this, false, {});
                 }}>
                     <View style={styles.viewModal}>
                         <View>
@@ -103,7 +107,7 @@ export default class Historico extends Component {
                             <View style={styles.estiloImagem}>
                                 <TouchableHighlight style={styles.fechar}
                                     onPress={() => {
-                                        this.setModalVisible(!this.state.modalVisible, {});
+                                        this.setModalVisible.bind(this, false, {});
                                     }}>
                                     <Text style={styles.buttonText}>Fechar</Text>
                                 </TouchableHighlight>
@@ -120,8 +124,8 @@ export default class Historico extends Component {
                         data={this.state.data}
                         renderItem={this.renderItem}
                         keyExtractor={(item, index) => item.id.toString()}
-                        />
-                        {/* keyExtractor={item => item.id} */}
+                    />
+                    {/* keyExtractor={item => item.id} */}
                     {/* <Button  onPress={() => this.logar()} title="Salva" /> */}
                 </SafeAreaView>
             </>
@@ -157,6 +161,7 @@ const styles = StyleSheet.create({
         top: 10,
         left: 10,
         textAlign: "center",
+        maxWidth:200,
     },
     entrar: {
         position: "absolute",
