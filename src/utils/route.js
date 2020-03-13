@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack'
  import Home from '../components/home'
  import NovoProblema from '../components/novoProblema'
  import Historico from '../components/historico'
+ import Perfil from '../components/perfil'
 
 const MainNav = createStackNavigator(
     {
@@ -30,6 +31,13 @@ const MainNav = createStackNavigator(
             title:"Historico de problemas",
             defaultNavigationOptions: {
                 title:"Historico de problemas",
+              }
+        },
+        Perfil:{
+            screen:Perfil,
+            title:"Perfil",
+            defaultNavigationOptions: {
+                title: 'Perfil',
               }
         },
     }

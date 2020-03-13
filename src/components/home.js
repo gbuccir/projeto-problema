@@ -16,13 +16,17 @@ export default class Home extends Component {
     this.props.navigation.navigate('NovoProblema', { login: user });
   }
 
+  irParaPerfil = (user) => {
+    this.props.navigation.navigate('Perfil', { login: user });
+  }
+
   render() {
     const { navigation } = this.props;
     const usuario = navigation.getParam('login');
 
     return (
       <View style={styles.container}>
-        <Image resizeMode='cover' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
+        <Image resizeMode='contain' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
         {/* <Text style={styles.userlogado}>{usuario}</Text> */}
 
         <Text style={[styles.subheader]}>Bem-vindo {usuario}</Text>
@@ -34,6 +38,10 @@ export default class Home extends Component {
 
         <TouchableOpacity style={styles.opcoes} onPress={() => this.irParaHistorico(usuario)} >
           <Text style={styles.buttonText}> Histórico </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.opcoes} onPress={() => this.irParaPerfil(usuario)} >
+          <Text style={styles.buttonText}> Perfil </Text>
         </TouchableOpacity>
 
       </View>
@@ -57,7 +65,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 250,
     position: "relative",
-    top: -70,
+    top: -50,
   },
   userlogado: {
     position: 'absolute',
@@ -89,6 +97,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     position: "relative",
     top: -30,
-    
+
   }
 });

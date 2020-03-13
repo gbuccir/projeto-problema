@@ -6,11 +6,11 @@ export default class Login extends Component {
   }
 
   logar = () => {
-    // if (this.state.mail == null || this.state.mail == '')
-    //   Alert.alert("Preencha o login");
-    // else if (this.state.senha == null || this.state.senha == '')
-    //   Alert.alert("Preencha a senha");
-    // else
+    if (this.state.mail == null || this.state.mail == '')
+      Alert.alert("Preencha o login");
+    else if (this.state.senha == null || this.state.senha == '')
+      Alert.alert("Preencha a senha");
+    else
       this.props.navigation.navigate('Home', { login: this.state.mail });
   }
 
@@ -18,14 +18,14 @@ export default class Login extends Component {
   componentDidMount = () => {
     var x = Dimensions.get('window').width;
     var y = Dimensions.get('window').height;
-     Alert.alert(x.toString(), y.toString());
+    //  Alert.alert(x.toString(), y.toString());
   }
 
   render() {
     return (
       <View style={styles.container}>
 
-        <Image resizeMode='cover' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
+        <Image resizeMode='contain' source={require('../../assets/imagens/App_logo.png')} style={[styles.imagem]} />
 
         {/* <Text style={styles.titulo} >Manutenção HNK</Text> */}
         <TextInput value={this.state.mail} onChangeText={text => this.state.mail = text} style={styles.input} secureTextEntry={false} placeholder="Login" />
