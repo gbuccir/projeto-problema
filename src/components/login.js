@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, Image, Dimensions } from 'react-native';
+import api from "../utils/api"
 export default class Login extends Component {
 
   state = {
@@ -11,7 +12,34 @@ export default class Login extends Component {
     else if (this.state.senha == null || this.state.senha == '')
       Alert.alert("Preencha a senha");
     else
-      this.props.navigation.navigate('Home', { login: this.state.mail });
+
+
+
+      // const response = await api.post("api/usuario/logar", {
+
+      //   login: this.state.mail,
+      //   senha: this.state.senha
+
+      // });
+
+
+      api.post('api/v1/auth', { Login: "gbucci@uol.com.br", Senha: "123" })
+        .then(function (response) {
+          //Alert.alert('salvo com sucesso')
+          
+          console.log("sucesso")
+          console.log(response.data)
+          //ver pq da erro no state
+          this.state.dados = response.data;
+          //         if (this.state.dados)
+          this.props.navigation.navigate('Home', { login: this.state.mail });
+        })
+        .catch(error => {
+          console.log("erro")
+          console.log(error)
+      });
+    
+    
   }
 
 
@@ -30,7 +58,7 @@ export default class Login extends Component {
         {/* <Text style={styles.titulo} >Manutenção HNK</Text> */}
         <TextInput value={this.state.mail} onChangeText={text => this.state.mail = text} style={styles.input} secureTextEntry={false} placeholder="Login" />
         <TextInput value={this.state.senha} onChangeText={text => this.state.senha = text} style={styles.input} secureTextEntry={true} placeholder="Senha" />
-        
+
         <TouchableOpacity style={styles.entrar} onPress={() => this.logar()} >
           <Text style={styles.buttonText}> Entrar </Text>
         </TouchableOpacity>
@@ -71,15 +99,15 @@ const styles = StyleSheet.create({
   },
   entrar: {
     marginTop: 40,
-    backgroundColor:"#205527",
-    padding:10,
-    borderRadius:5,
-    fontSize:16,
-    width:200,
-    textAlign:"center",
+    backgroundColor: "#205527",
+    padding: 10,
+    borderRadius: 5,
+    fontSize: 16,
+    width: 200,
+    textAlign: "center",
   },
-  buttonText:{
-    color:"#fff",
-    textAlign:"center",
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
   }
 });
